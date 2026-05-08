@@ -17,6 +17,9 @@
         opacity: 0.66;
     }
 }
+.members_c8ffbb {
+	background: transparent !important;
+}
 .info__2debe::after {
     content: "RiverLand" " " "Hyprland";
     color: var(--text-muted);
