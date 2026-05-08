@@ -456,10 +456,11 @@ code {
 }
 .chatContent_f75fb0,
 .scroller_f35c3c {
-    background: hsl(
-        from var(--hsl-background-shading) h s
-            l/calc(var(--background-shading-percent) * 0.4)
-    );
+    background: transparent !important;
+}
+.messagesWrapper__36d07,
+.scroller__36d07 {
+    background: transparent !important;
 }
 .chatGradientBase__36d07 {
     background: none;
@@ -3652,12 +3653,18 @@ code {
 .sidebarList__5e434,
 .panels__5e434,
 .chat_f75fb0 > .subtitleContainer_f75fb0,
-.chatContent_f75fb0,
 .container_c8ffbb {
     border-radius: var(--panel-radius) !important;
     border: var(--panel-border) !important;
     box-sizing: border-box !important;
     background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+/* chat content — no bg/border, messages float individually */
+.chatContent_f75fb0 {
+    border-radius: var(--panel-radius) !important;
+    border: none !important;
+    background-color: transparent !important;
 }
 
 /* page wrapper — right + bottom padding */
@@ -3738,5 +3745,63 @@ code {
 /* top title bar area */
 .bar_c38106 {
     margin-bottom: var(--panel-gap) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   PER-MESSAGE SEGMENTATION — translucence style
+   ═══════════════════════════════════════════════════ */
+
+:root {
+    --message-bg: rgba(0, 0, 0, 0.35);
+    --message-bg-hover: rgba(0, 0, 0, 0.45);
+    --message-radius: 8px;
+    --message-padding: 8px 12px;
+    --message-margin: 5px 12px;
+    --message-mentioned-bg: rgba(255, 183, 0, 0.08);
+    --message-mentioned-bg-hover: rgba(255, 183, 0, 0.12);
+}
+
+/* individual message cards — target the li wrapper */
+.messageListItem__5126c {
+    background: var(--message-bg) !important;
+    border-radius: var(--message-radius) !important;
+    padding: var(--message-padding) !important;
+    margin: var(--message-margin) !important;
+    transition: background 0.15s ease !important;
+}
+
+.messageListItem__5126c:hover {
+    background: var(--message-bg-hover) !important;
+}
+
+/* also target inner message div */
+.message__5126c {
+    background: transparent !important;
+}
+
+/* mentioned messages */
+.messageListItem__5126c:has(.mentioned__5126c) {
+    background: var(--message-mentioned-bg) !important;
+    border-left: 3px solid var(--hsl-main-color) !important;
+}
+
+.messageListItem__5126c:has(.mentioned__5126c):hover {
+    background: var(--message-mentioned-bg-hover) !important;
+}
+
+/* remove default message hover background */
+.message__5126c::before {
+    display: none !important;
+}
+
+/* replying highlight */
+.messageListItem__5126c:has(.replying__5126c) {
+    background: hsl(from var(--hsl-main-color) h s l/0.12) !important;
+    border-left: 3px solid var(--hsl-main-color) !important;
+}
+
+/* remove the default divider between message groups */
+[class*="divider_"][class*="beforeGroup"] {
+    display: none !important;
 }
 
